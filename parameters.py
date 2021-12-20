@@ -1,0 +1,26 @@
+dict_template_mail = {
+    'FIELD_1':{
+    'VALUE':'',
+    'CORD_X':'',
+    'CORD_Y':'',
+    'STYLE':'1',
+    },
+    'FIELD_2':{
+    'VALUE':'',
+    'CORD_X':'',
+    'CORD_Y':'',
+    'STYLE':'2',
+    },
+    'FIELD_3':{
+    'VALUE':'',
+    'CORD_X':'',
+    'CORD_Y':'',
+    'STYLE':'2',
+    },
+    'FIELD_4':{
+    'VALUE':'',
+    'CORD_X':'',
+    'CORD_Y':'',
+    'STYLE':'2',
+    }
+}

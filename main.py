@@ -9,132 +9,53 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 
 import utils
 import functions
+from parameters import *
 
 '''
-[ ] Read Template
-[ ] Read Input Json
-[ ] Read Input Csv
-[ ] Process Csv
-[ ] Process Json
-[ ] Merge Template + Input
-[ ] Save Report
+[X] Read Template
+[X] Read Input Json
+[X] Read Input Csv
+[X] Process Csv
+[X] Process Json
+[X] Merge Template + Input
+[X] Save Report
+[X] How to change Font Size
+[X] How to change Font Style
+[X] How to change Font Color
+
+Extras:
+
+[ ] Func to make human Readable 
 '''
 
 
-MIN_X = 20
-MIN_Y = 10
-
-MAX_X = 530
-MAX_Y = 820
-
-def read_input_json():
-    pass
-
-
-def read_input_csv():
-    pass
-
-
-def save_input_in_ram(list_values : list):
-    packet = io.BytesIO()
-    can = canvas.Canvas(packet, pagesize=A4)
-    # "Hello world"
-    for item in list_values:
-        can.drawString(int(item['CORD_X']), int(item['CORD_Y']), item['VALUE'])
-    # for cord_x in range(20, 530, 55):
-    #     for cord_y in range(10, 820, 20):
-    #         can.drawString(cord_x, cord_y, f'[{str(cord_x).zfill(3)}X{str(cord_y).zfill(3)}]')
-    # can.save()
-    packet.seek(0)
-    # create a new PDF with Reportlab
-    new_pdf = PdfFileReader(packet)
-    return new_pdf
-
-
-def read_template(path : str, filename : str):
-    # read your existing PDF
-    # input/basic_pdf_01.pdf
-    full_path = str(os.path.join(utils.process_str_to_lower(path), utils.process_str_to_lower(filename)).strip())
-    existing_pdf = PdfFileReader(open(full_path, "rb"))
-    page = existing_pdf.getPage(0)
-    return page
-
-
-def merge_pdfs(page, new_pdf):
-    output = PdfFileWriter()
-    page.mergePage(new_pdf.getPage(0))
-    output.addPage(page)
-    return output
-
-
-def save_fill_template(path : str, filename : str, output):
-    # finally, write "output" to a real file
-    full_path = str(os.path.join(utils.process_str_to_lower(path), utils.process_str_to_lower(filename)).strip())
-    outputStream = open(full_path, "wb")
-    output.write(outputStream)
-    outputStream.close()
-
-
-def generate_direct_mail(path_output, filename_output, path_template, filename_template, list_values):
-    new_pdf = save_input_in_ram(list_values=list_values)
-    page = read_template(path=utils.process_str_to_lower(path_template), filename=utils.process_str_to_lower(filename_template))
-    output = merge_pdfs(page=page, new_pdf=new_pdf)
-    save_fill_template(path=path_output, filename=filename_output, output=output)
-
-
-# input/basic_pdf_01.pdf
-# output/report.pdf
 path_output = 'output'
 filename_output = 'report.pdf'
-path_template = 'input'
-filename_template = 'basic_pdf_01.pdf'
+path_template = 'templates'
+filename_template = 'template_base_vazio.pdf'
 value = "Valor Teste"
 
+path_input_json = 'input'
+filename_input_json = 'value_01'
 
-list_values_input = [
-    {
-    'CORD_X':'100',
-    'CORD_Y':'100',
-    'VALUE':'100x100',
-    },
-    {
-    'CORD_X':'200',
-    'CORD_Y':'200',
-    'VALUE':'200x200',
-    },
-    {
-    'CORD_X':'300',
-    'CORD_Y':'300',
-    'VALUE':'300x300',
-    },
-    {
-    'CORD_X':'400',
-    'CORD_Y':'400',
-    'VALUE':'400x400',
-    },
-    {
-    'CORD_X':'500',
-    'CORD_Y':'500',
-    'VALUE':'500x500',
-    },
-    {
-    'CORD_X':'550',
-    'CORD_Y':'550',
-    'VALUE':'550x550',
-    },
-    {
-    'CORD_X':'530',
-    'CORD_Y':'820',
-    'VALUE':'530x820',
-    },
-    {
-    'CORD_X':MIN_X,
-    'CORD_Y':MIN_Y,
-    'VALUE':'20x10',
-    }
-                    ]
 
-generate_direct_mail(path_output=path_output, filename_output=filename_output, path_template=path_template, filename_template=filename_template, list_values=list_values_input)
+list_infos_json = functions.read_input_json(path=path_input_json, filename=filename_input_json)
+list_infos_csv = functions.read_input_csv(path=path_input_json, filename=filename_input_json)
+list_infos_xlsx = functions.read_input_excel(path=path_input_json, filename=filename_input_json)
+
+list_input = list_infos_csv
+
+
+output = PdfFileWriter()
+for dict_infos in list_infos_xlsx:
+    
+    dict_template_mail = functions.process_dict_template(dict_json_input=dict_infos)
+
+    output = functions.generate_direct_mail(path_template=path_template, filename_template=filename_template, dict_values=dict_template_mail, path_input_json=path_input_json, filename_input_json=filename_input_json, output=output)
+    
+functions.save_fill_template(path=path_output, filename=filename_output, output=output)
+
+functions.generate_direct_mail(path_output=path_output, filename_output=filename_output, path_template=path_template, filename_template=filename_template, dict_values=dict_template_mail)
 
 
 
