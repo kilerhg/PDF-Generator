@@ -1,26 +1,44 @@
 dict_template_mail = {
     'FIELD_1':{
     'VALUE':'',
-    'CORD_X':'',
-    'CORD_Y':'',
+    'CORD_X':'223',
+    'CORD_Y':'314',
     'STYLE':'1',
     },
     'FIELD_2':{
     'VALUE':'',
-    'CORD_X':'',
-    'CORD_Y':'',
+    'CORD_X':'335',
+    'CORD_Y':'381',
     'STYLE':'2',
     },
     'FIELD_3':{
     'VALUE':'',
-    'CORD_X':'',
-    'CORD_Y':'',
+    'CORD_X':'281',
+    'CORD_Y':'403',
     'STYLE':'2',
     },
     'FIELD_4':{
     'VALUE':'',
-    'CORD_X':'',
-    'CORD_Y':'',
-    'STYLE':'2',
+    'CORD_X':'205',
+    'CORD_Y':'510',
+    'STYLE':'3',
+    },
+    'FIELD_5':{
+    'VALUE':'',
+    'CORD_X':'192',
+    'CORD_Y':'552',
+    'STYLE':'3',
+    },
+    'FIELD_6':{
+    'VALUE':'',
+    'CORD_X':'474',
+    'CORD_Y':'510',
+    'STYLE':'3',
+    },
+    'FIELD_7':{
+    'VALUE':'',
+    'CORD_X':'496',
+    'CORD_Y':'510',
+    'STYLE':'3',
     }
 }

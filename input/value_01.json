@@ -1,6 +1,11 @@
-{
-    "FIELD_1" : "Osasco",
-    "FIELD_2" : "Osasco",
-    "FIELD_3" : "",
-    "FIELD_4" : ""
-}
+[
+    {
+        "FIELD_1" : "Nome",
+        "FIELD_2" : "Curso",
+        "FIELD_3" : "1",
+        "FIELD_4" : "3",
+        "FIELD_5" : "2",
+        "FIELD_6" : "4",
+        "FIELD_7" : "5"
+    }
+]

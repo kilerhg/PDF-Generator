@@ -39,10 +39,13 @@ NUMBER_MONTH_TO_NAME_MONTH = {
 
 
 def process_dict_template(dict_json_input, dict_template = parameters.dict_template_mail):
-    dict_template['FIELD_1']['VALUE'] = process_name_city_actual_date(dict_json_input['FIELD_1'])
+    dict_template['FIELD_1']['VALUE'] = dict_json_input['FIELD_1']
     dict_template['FIELD_2']['VALUE'] = dict_json_input['FIELD_2']
     dict_template['FIELD_3']['VALUE'] = dict_json_input['FIELD_3']
     dict_template['FIELD_4']['VALUE'] = dict_json_input['FIELD_4']
+    dict_template['FIELD_5']['VALUE'] = dict_json_input['FIELD_5']
+    dict_template['FIELD_6']['VALUE'] = dict_json_input['FIELD_6']
+    dict_template['FIELD_7']['VALUE'] = dict_json_input['FIELD_7']
     return dict_template
 
 
@@ -81,16 +84,18 @@ def save_input_in_ram(dict_values : dict):
     packet = io.BytesIO()
     can = canvas.Canvas(packet, pagesize=landscape(LETTER))
 
-    pdfmetrics.registerFont(TTFont('Trebuchet MS', 'trebuc.ttf'))
-
+    pdfmetrics.registerFont(TTFont('Playfair Display', 'PlayfairDisplay-Regular.ttf'))
 
     for item in dict_values.values():
         if 'STYLE' == '1':
-            can.setFillColorRGB(r=0, g=0, b=0)
-            can.setFont(psfontname='Trebuchet MS', size=16) 
+            can.setFillColorRGB(r=255, g=255, b=255)
+            can.setFont(psfontname='Playfair Display', size=56) 
         elif 'STYLE' == '2':
-            can.setFillColorRGB(r=0, g=0, b=0)
-            can.setFont(psfontname='Trebuchet MS', size=10) 
+            can.setFillColorRGB(r=198, g=149, b=82)
+            can.setFont(psfontname='Times-Roman', size=16) 
+        elif 'STYLE' == '3':
+            can.setFillColorRGB(r=255, g=255, b=255)
+            can.setFont(psfontname='Times-Roman', size=12) 
         
         can.drawString(float(item['CORD_X']), float(item['CORD_Y']), item['VALUE'])
     # for cord_x in range(MIN_X + 20, MAX_X - 20, 30):
